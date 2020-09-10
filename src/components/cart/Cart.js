@@ -1,8 +1,9 @@
 import React from 'react';
 import './Cart.css'
+import { Link } from 'react-router-dom';
 const cart = (props) => {
     const cart = props.cart;
-    const total = cart.reduce((total, pd) => total+pd.price, 0);
+    const total = cart.reduce((total, pd) => total+pd.price*pd.quantity, 0);
     let shipping = 0;
     if (total>50){
         shipping = 0;
@@ -27,6 +28,9 @@ const cart = (props) => {
             <p><small>Shipping & Handling: ${shipping}</small></p>
             <p><small>Total before tax: ${formatNum(tax)}</small></p>
             <h3 className="grandTotal">Order Total: ${formatNum(grandTotal)}</h3>
+            {
+                props.children
+            }
         </div>
     );
 };
