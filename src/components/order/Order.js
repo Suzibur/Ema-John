@@ -3,7 +3,7 @@ import { getDatabaseCart, removeFromDatabaseCart, processOrder } from '../../uti
 import fakeData from '../../fakeData/index'
 import OrderProducts from '../OrderProducts/OrderProducts';
 import Cart from '../cart/Cart'
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Image from '../../images/giphy.gif'
 
 const Order = () => {
@@ -13,11 +13,13 @@ const Order = () => {
         setCarts(newCart);
         removeFromDatabaseCart(key);
     }
+    const history = useHistory();
     const [orderPlaced, setOrderPlaced] = useState(false);
     const handlePlaceOrder = ()=>{
         setOrderPlaced(true);
         setCarts([]);
         processOrder();
+        history.push('/shipment')
     }
     useEffect(() => {
         const savedCart = getDatabaseCart();
